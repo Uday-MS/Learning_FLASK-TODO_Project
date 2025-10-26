@@ -14,14 +14,18 @@ def login():
         password=request.form.get('password')
 
         if username==USER_CREDENTIALS['username'] and password==USER_CREDENTIALS['password']:
-            session['user']==username
+            session['user']=username
             flash('Login Succesful','success')
+            return redirect(url_for('tasks.view_tasks'))
+            
+           
         else:
             flash('invalid username or password ')
+            
 
     return render_template("login.html")
 
-@auth_bp.route('/logut')
+@auth_bp.route('/logout')
 
 def logout():
     session.pop('user',None)
